@@ -1,0 +1,26 @@
+{
+  "name": "laurinha-defense",
+  "version": "1.0.0",
+  "description": "Tower defense da minha sobrinha",
+  "type": "module",
+  "keywords": [
+    "capacitor",
+    "mobile"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "sync": "cap sync"
+  },
+  "dependencies": {
+    "@capacitor/core": "latest",
+    "@capacitor/camera": "latest",
+    "@capacitor/splash-screen": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "latest",
+    "vite": "^5.4.2"
+  },
+  "author": "Leronardo Silveira",
+  "license": "MIT"
+}

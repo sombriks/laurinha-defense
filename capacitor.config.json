@@ -1,0 +1,10 @@
+{
+  "appId": "com.sombriks.ldefense",
+  "appName": "laurinha-defense",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}
