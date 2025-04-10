@@ -13,4 +13,5 @@ and comes with a very minimal shell for building an app.
 npm dev
 ```
 
+[repo]: https://github.com/sombriks/laurinha-defense
 [create-app]: https://github.com/ionic-team/create-capacitor-app
