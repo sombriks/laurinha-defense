@@ -5,18 +5,33 @@ export class Intro extends Phaser.Scene {
   #sprites = []
 
   create() {
-    const graphics = this.add.graphics({lineStyle: {color: 0xff0000}})
 
-    const circle = new Phaser.Geom.Circle(400, 300, 100)
-    const line = new Phaser.Geom.Line(400, 400, 400, 300)
+    //  Create loads of random bodies
+    for (let i = 0; i < 100; i++)
+    {
+      const x = Phaser.Math.Between(0, 480);
+      const y = Phaser.Math.Between(0, 480);
 
-    graphics.strokeCircleShape(circle)
-    graphics.strokeLineShape(line)
+      if (Math.random() < 0.7)
+      {
+        const sides = Phaser.Math.Between(3, 14);
+        const radius = Phaser.Math.Between(8, 50);
 
-    this.#sprites.push(graphics)
+        this.matter.add.polygon(x, y, sides, radius, { restitution: 0.9 });
+      }
+      else
+      {
+        const width = Phaser.Math.Between(16, 128);
+        const height = Phaser.Math.Between(8, 64);
+
+        this.matter.add.rectangle(x, y, width, height, { restitution: 0.9 });
+      }
+    }
+
+    this.matter.add.mouseSpring();
+
   }
 
   update(time, delta) {
-    Phaser.Actions.IncY(this.#sprites, 0.05)
   }
 }

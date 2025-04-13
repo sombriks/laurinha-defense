@@ -7,10 +7,13 @@ SplashScreen.hide().then(()=>{})
 const game = new Phaser.Game({
   scene: Intro,
   type: Phaser.AUTO,
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: 480,
+  height: 480,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  physics: {
+    default: 'matter',
   }
 })
