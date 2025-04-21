@@ -13,7 +13,15 @@ const game = new Phaser.Game({
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
+  pixelArt: true,
   physics: {
     default: 'matter',
+    matter:{
+      debug: true,
+      gravity: {
+        y:0
+      }
+
+    }
   }
 })
