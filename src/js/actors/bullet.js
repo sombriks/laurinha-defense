@@ -1,6 +1,6 @@
 import Phaser from "phaser"
 
-export class Bullet  {
+export class Bullet {
 
   #shape
 
@@ -20,6 +20,6 @@ export class Bullet  {
    */
   constructor({scene, x, y, vx, vy}) {
     this.#shape = scene.matter.add.circle(x, y, 5)
-    this.#shape.force.y = -1
+    scene.matter.applyForce([this.#shape], {x: vx, y: vy})
   }
 }

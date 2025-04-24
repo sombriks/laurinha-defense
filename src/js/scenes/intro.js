@@ -13,11 +13,7 @@ export class Intro extends Phaser.Scene {
     this.matter.world.setBounds(0, 0, 480, 480)
     // this.matter.add.mouseSpring()
     this.input.on('pointerdown', (ev) => {
-      console.log(ev)
-      new Bullet({scene: this, x: ev.x, y: 400, vx: 10, vy: 10})
-      // for(const e of this.#enemies) {
-      //   this.physics.accelerateToObject(e.shape, this.#enemies[0], 100)
-      // }
+      new Bullet({scene: this, x: ev.x, y: ev.y, vx: 0, vy: -0.01})
     })
   }
 
