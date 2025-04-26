@@ -1,11 +1,15 @@
 import Phaser from "phaser"
 import { SplashScreen } from '@capacitor/splash-screen'
-import {Intro} from "./scenes/intro.js";
 
-SplashScreen.hide().then(()=>{})
+import {Intro} from "./scenes/intro"
+import {Field} from "./scenes/field"
+
+SplashScreen.hide().then(()=>{
+  // TODO
+})
 
 const game = new Phaser.Game({
-  scene: Intro,
+  scene: [Intro, Field],
   type: Phaser.AUTO,
   width: 480,
   height: 480,

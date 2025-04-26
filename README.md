@@ -1,6 +1,6 @@
 # [Laurinha Defense][repo]
 
-Jogo de towser defense para a minha sobrinha
+Jogo de tower defense para a minha sobrinha
 
 ## Created with Capacitor Create App
 
@@ -10,7 +10,7 @@ and comes with a very minimal shell for building an app.
 ### Running
 
 ```bash
-npm dev
+npm run dev
 ```
 
 [repo]: https://github.com/sombriks/laurinha-defense
