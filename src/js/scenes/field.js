@@ -25,12 +25,13 @@ export class Field extends Phaser.Scene {
       new Bullet({scene: this, x: ev.x, y: 480, vx: 0, vy: -0.01})
     })
 
-    this.#scoreLabel = this.add.text(10, 10, "Score: 0")
-    this.add.text(10, 30, "Health: " + this.#hp)
+    this.#scoreLabel = this.add.text(10, 10, "Score: " + this.score)
+    this.#healthLabel = this.add.text(10, 30, "Health: " + this.#hp)
 
   }
 
   update(time, delta) {
+    this.#enemies = this.#enemies.filter(e => !e.dead)
     if (this.#delay < time) {
       const x = Phaser.Math.Between(0, 480)
       this.#enemies.push(new Enemy(this, x, 0))
@@ -42,5 +43,10 @@ export class Field extends Phaser.Scene {
   addScore(s) {
     this.#score += s
     this.#scoreLabel.text = "Score: " + this.#score
+  }
+
+  causeDamage(d) {
+    this.#hp -= d
+    this.#healthLabel.text = "Health: " + this.#hp
   }
 }

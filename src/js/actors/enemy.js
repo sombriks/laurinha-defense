@@ -5,6 +5,7 @@ export class Enemy {
   #shape
   #damage = Phaser.Math.Between(10, 50)
   #scene
+  #dead = false
 
   /**
    * @returns {MatterJS.BodyType}
@@ -21,7 +22,13 @@ export class Enemy {
   }
 
   /**
-   *
+   * @returns {boolean}
+   */
+  get dead() {
+    return this.#dead
+  }
+
+  /**
    * @param {Phaser.Scene} scene
    * @param {Number} x
    * @param {Number} y
@@ -37,11 +44,20 @@ export class Enemy {
     this.shape.circleRadius = this.damage
     if (this.damage <= 20) {
       if (this.#scene.addScore) this.#scene.addScore(1)
-      this.#scene.matter.world.remove([this.shape])
+      this.die()
     }
   }
 
   forward() {
     this.#scene.matter.applyForce([this.shape], {x: 0, y: 0.002})
+    if (this.shape.position.y > 400) {
+      this.#scene.causeDamage(this.damage)
+      this.die()
+    }
+  }
+
+  die () {
+    this.#scene.matter.world.remove([this.shape])
+    this.#dead = true
   }
 }
