@@ -1,15 +1,16 @@
 import Phaser from "phaser"
-import { SplashScreen } from '@capacitor/splash-screen'
+import {SplashScreen} from "@capacitor/splash-screen"
 
 import {Intro} from "./scenes/intro"
 import {Field} from "./scenes/field"
+import {GameOver} from "./scenes/game-over"
 
-SplashScreen.hide().then(()=>{
+SplashScreen.hide().then(() => {
   // TODO
 })
 
 const game = new Phaser.Game({
-  scene: [Intro, Field],
+  scene: [Intro, Field, GameOver],
   type: Phaser.AUTO,
   width: 480,
   height: 480,
@@ -20,12 +21,11 @@ const game = new Phaser.Game({
   pixelArt: true,
   physics: {
     default: 'matter',
-    matter:{
+    matter: {
       debug: true,
       gravity: {
-        y:0
+        y: 0
       }
-
     }
   }
 })

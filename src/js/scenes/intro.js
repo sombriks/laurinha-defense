@@ -13,6 +13,7 @@ export class Intro extends Phaser.Scene {
     this.add//
       .text(240, 260, "Toque para iniciar")//
       .setOrigin(0.5, 0.5)
+
     this.input.on("pointerdown", (event) => {
       this.scene.stop("Intro");
       this.game.scene.start('Field')

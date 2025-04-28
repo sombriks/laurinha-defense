@@ -57,7 +57,7 @@ export class Enemy {
   }
 
   die () {
-    this.#scene.matter.world.remove([this.shape])
+    this.#scene.matter.world?.remove([this.shape])
     this.#dead = true
   }
 }
