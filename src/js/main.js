@@ -13,7 +13,7 @@ const game = new Phaser.Game({
   scene: [Intro, Field, GameOver],
   type: Phaser.AUTO,
   width: 480,
-  height: 480,
+  height: 640,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,

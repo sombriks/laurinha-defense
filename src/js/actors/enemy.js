@@ -50,7 +50,7 @@ export class Enemy {
 
   forward() {
     this.#scene.matter.applyForce([this.shape], {x: 0, y: 0.002})
-    if (this.shape.position.y > 400) {
+    if (this.shape.position.y >= 590) {
       this.#scene.causeDamage(this.damage)
       this.die()
     }

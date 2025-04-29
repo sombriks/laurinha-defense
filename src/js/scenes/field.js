@@ -11,8 +11,8 @@ export class Field extends Phaser.Scene {
 
   #enemies = []
   #delay = 0
-  #score = 0.0
-  #hp = 100
+  #score
+  #hp
 
   #scoreLabel
   #healthLabel
@@ -20,23 +20,29 @@ export class Field extends Phaser.Scene {
   create() {
     this.matter.world.setBounds()
 
-    this.#scoreLabel = this.add.text(10, 10, "Score: " + this.#score)
+    this.#hp = 100
+    this.#score = 0
+
+    this.#scoreLabel = this.add.text(10, 10, "Score: 0")
     this.#healthLabel = this.add.text(10, 30, "Health: " + this.#hp)
 
     this.add.graphics()
       .lineStyle(2,0xFF0000)
-      .moveTo(0, 400)
-      .lineTo(480,400)
+      .moveTo(0, 590)
+      .lineTo(480,590)
       .stroke()
 
     // this.matter.add.mouseSpring()
     this.input.on('pointerdown', (ev) => {
-      new Bullet({scene: this, x: ev.x, y: 480, vx: 0, vy: -0.01})
+      new Bullet({scene: this, x: ev.x, y: 630, vx: 0, vy: -0.01})
     })
   }
 
   update(time, delta) {
-    if (this.#hp <= 0) return
+    if(this.#hp <= 0) {
+      this.game.scene.stop('Field')
+      this.game.scene.start("GameOver")
+    }
     this.#enemies = this.#enemies.filter(e => !e.dead)
     if (this.#delay < time) {
       const x = Phaser.Math.Between(0, 480)
@@ -54,11 +60,5 @@ export class Field extends Phaser.Scene {
   causeDamage(d) {
     this.#hp -= d
     this.#healthLabel.text = "Health: " + this.#hp
-    if(this.#hp <= 0) {
-      this.game.scene.stop('Field')
-      this.#hp = 100
-      this.#score = 0
-      this.scene.start("GameOver")
-    }
   }
 }
