@@ -37,9 +37,15 @@ export class Field extends Phaser.Scene {
       .lineTo(480, 590)
       .stroke()
 
-    // this.matter.add.mouseSpring()
     this.input.on('pointerdown', (ev) => {
-      new Bullet({ scene: this, x: ev.x, y: 630, vx: 0, vy: -0.01 })
+      const originX = 240;
+      const originY = 640;
+      const angle = Phaser.Math.Angle.Between(originX, originY, ev.x, ev.y);
+      const speed = 0.007
+      const vx = Math.cos(angle) * speed
+      const vy = Math.sin(angle) * speed
+      console.log(vx, vy)
+      new Bullet({ scene: this, x: originX, y: originY, vx, vy })
       // play sound
       this.sound.play('pew')
     })
@@ -68,5 +74,6 @@ export class Field extends Phaser.Scene {
   causeDamage(d) {
     this.#hp -= d
     this.#healthLabel.text = "Health: " + this.#hp
+    this.cameras.main.flash(200, 255, 0, 0)
   }
 }
