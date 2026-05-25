@@ -1,7 +1,7 @@
 import Phaser from "phaser"
 
-import {Bullet} from "../actors/bullet"
-import {Enemy} from "../actors/enemy"
+import { Bullet } from "../actors/bullet"
+import { Enemy } from "../actors/enemy"
 
 export class Field extends Phaser.Scene {
 
@@ -17,6 +17,10 @@ export class Field extends Phaser.Scene {
   #scoreLabel
   #healthLabel
 
+  preload() {
+    this.load.audio('pew', 'assets/sfx/pew.mp3')
+  }
+
   create() {
     this.matter.world.setBounds()
 
@@ -26,23 +30,27 @@ export class Field extends Phaser.Scene {
     this.#scoreLabel = this.add.text(10, 10, "Score: 0")
     this.#healthLabel = this.add.text(10, 30, "Health: " + this.#hp)
 
+    // the line
     this.add.graphics()
-      .lineStyle(2,0xFF0000)
+      .lineStyle(2, 0xFF0000)
       .moveTo(0, 590)
-      .lineTo(480,590)
+      .lineTo(480, 590)
       .stroke()
 
     // this.matter.add.mouseSpring()
     this.input.on('pointerdown', (ev) => {
-      new Bullet({scene: this, x: ev.x, y: 630, vx: 0, vy: -0.01})
+      new Bullet({ scene: this, x: ev.x, y: 630, vx: 0, vy: -0.01 })
+      // play sound
+      this.sound.play('pew')
     })
   }
 
   update(time, delta) {
-    if(this.#hp <= 0) {
+    if (this.#hp <= 0) {
       this.game.scene.stop('Field')
       this.game.scene.start("GameOver")
     }
+
     this.#enemies = this.#enemies.filter(e => !e.dead)
     if (this.#delay < time) {
       const x = Phaser.Math.Between(0, 480)
