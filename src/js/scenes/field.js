@@ -18,7 +18,8 @@ export class Field extends Phaser.Scene {
   #healthLabel
 
   preload() {
-    this.load.audio('pew', 'assets/sfx/pew.mp3')
+    this.load.audio('pew', 'assets/sfx/pew.mp3');
+    this.load.audio('boom', 'assets/sfx/boom.mp3');
   }
 
   create() {
@@ -41,13 +42,11 @@ export class Field extends Phaser.Scene {
       const originX = 240;
       const originY = 640;
       const angle = Phaser.Math.Angle.Between(originX, originY, ev.x, ev.y);
-      const speed = 0.007
-      const vx = Math.cos(angle) * speed
-      const vy = Math.sin(angle) * speed
-      console.log(vx, vy)
-      new Bullet({ scene: this, x: originX, y: originY, vx, vy })
-      // play sound
-      this.sound.play('pew')
+      const speed = 0.007;
+      const vx = Math.cos(angle) * speed;
+      const vy = Math.sin(angle) * speed;
+      new Bullet({ scene: this, x: originX, y: originY, vx, vy });
+      this.sound.play('pew');
     })
   }
 
@@ -74,6 +73,7 @@ export class Field extends Phaser.Scene {
   causeDamage(d) {
     this.#hp -= d
     this.#healthLabel.text = "Health: " + this.#hp
-    this.cameras.main.flash(200, 255, 0, 0)
+    this.cameras.main.flash(200, 255, 0, 0);
+    this.sound.play('boom');
   }
 }
