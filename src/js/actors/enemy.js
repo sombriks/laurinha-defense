@@ -2,6 +2,7 @@ import Phaser from "phaser"
 
 export class Enemy {
 
+  #img
   #shape
   #damage = Phaser.Math.Between(10, 50)
   #scene
@@ -34,6 +35,7 @@ export class Enemy {
    * @param {Number} y
    */
   constructor(scene, x, y) {
+    this.#img = scene.add.image(x, y, 'emoji', 15);
     this.#shape = scene.matter.add.circle(x, y, this.damage)
     this.#shape.enemy = this
     this.#scene = scene
@@ -50,7 +52,7 @@ export class Enemy {
   }
 
   forward() {
-    this.#scene.matter.applyForce([this.shape], { x: 0, y: 0.002 })
+    this.#scene.matter.applyForce([this.shape], { x: 0, y: 0.002 });
     if (this.shape.position.y >= 590) {
       this.#scene.causeDamage(this.damage)
       this.die()
@@ -59,6 +61,12 @@ export class Enemy {
 
   die() {
     this.#scene.matter.world?.remove([this.shape])
+    this.#img.destroy();
     this.#isDead = true
+  }
+
+  update() {
+    this.#img.x = this.shape.position.x;
+    this.#img.y = this.shape.position.y;
   }
 }
