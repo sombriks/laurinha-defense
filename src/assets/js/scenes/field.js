@@ -1,7 +1,7 @@
-import Phaser from "phaser"
+import Phaser from "../phaser/phaser.js"
 
-import { Bullet } from "../actors/bullet"
-import { Enemy } from "../actors/enemy"
+import { Bullet } from "../actors/bullet.js"
+import { Enemy } from "../actors/enemy.js"
 
 export class Field extends Phaser.Scene {
 

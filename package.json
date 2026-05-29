@@ -1,28 +1,22 @@
 {
+  "type": "module",
   "name": "laurinha-defense",
   "version": "1.0.0",
-  "description": "Tower defense da minha sobrinha",
-  "type": "module",
+  "description": "Tower defense da minha sombrinha",
+  "author": "Leronardo Silveira",
+  "license": "MIT",
   "keywords": [
-    "capacitor",
-    "mobile"
+    "eleventy",
+    "phaser"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "build:gh": "vite build --base=$BASE_URL",
-    "sync": "cap sync"
-  },
-  "dependencies": {
-    "@capacitor/core": "latest",
-    "@capacitor/splash-screen": "latest",
-    "matter-js": "^0.20.0",
-    "phaser": "^3.88.2"
+    "dev": "eleventy --serve --incremental",
+    "build": "eleventy",
+    "prebuild": "rm -rf dist"
   },
   "devDependencies": {
-    "@capacitor/cli": "latest",
-    "vite": "^5.4.2"
-  },
-  "author": "Leronardo Silveira",
-  "license": "MIT"
+    "@11ty/eleventy": "^3.1.5",
+    "matter-js": "^0.20.0",
+    "phaser": "^4.1.0"
+  }
 }

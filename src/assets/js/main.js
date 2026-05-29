@@ -1,13 +1,8 @@
-import Phaser from "phaser"
-import {SplashScreen} from "@capacitor/splash-screen"
+import Phaser from "./phaser/phaser.js"
 
-import {Intro} from "./scenes/intro"
-import {Field} from "./scenes/field"
-import {GameOver} from "./scenes/game-over"
-
-SplashScreen.hide().then(() => {
-  // TODO
-})
+import {Intro} from "./scenes/intro.js"
+import {Field} from "./scenes/field.js"
+import {GameOver} from "./scenes/game-over.js"
 
 const game = new Phaser.Game({
   scene: [Intro, Field, GameOver],
