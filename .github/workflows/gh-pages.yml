@@ -24,7 +24,7 @@ jobs:
           node-version-file: 'package.json'
       - run: |
           npm install
-          npm run build::gh
+          npm run build:gh
         env:
           BASE_URL: /laurinha-defense
       - uses: actions/upload-pages-artifact@v3
