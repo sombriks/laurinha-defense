@@ -35,13 +35,12 @@ export class Enemy {
    * @param {Number} y
    */
   constructor(scene, x, y) {
+    this.#scene = scene
     this.#damage = Phaser.Math.Between(10, 50)
     this.#shape = scene.matter.add.circle(x, y, this.damage)
     this.#img = scene.add.image(x, y, 'emoji', 15);
-    this.#img.anchor = 0.5;
-    this.#img.setScale(0.5 * this.damage, 0.5 * this.damage);
-    this.#shape.enemy = this
-    this.#scene = scene
+    this.#img.setOrigin(0.5, 0.5);
+    this.update()
   }
 
   hit(damage) {
@@ -71,6 +70,6 @@ export class Enemy {
   update() {
     this.#img.x = this.shape.position.x;
     this.#img.y = this.shape.position.y;
-    this.#img.setScale(0.5 * this.damage, 0.5 * this.damage);
+    this.#img.setDisplaySize(this.damage, this.damage);
   }
 }
