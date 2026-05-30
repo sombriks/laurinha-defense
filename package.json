@@ -6,7 +6,7 @@
   "author": "Leronardo Silveira",
   "license": "MIT",
   "keywords": [
-    "eleventy",
+    "parcel",
     "phaser"
   ],
   "scripts": {
