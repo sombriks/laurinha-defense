@@ -11,9 +11,10 @@
   ],
   "scripts": {
     "dev": "parcel src/index.html",
+    "predev": "rm -rf .parcel-cache dist",
     "build": "parcel build --dist-dir dist src/index.html",
-    "build:gh": "parcel build --dist-dir dist --public-url /laurinha-defense src/index.html",
-    "prebuild": "rm -rf dist"
+    "prebuild": "rm -rf dist",
+    "build:gh": "parcel build --dist-dir dist --public-url /laurinha-defense src/index.html"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.16.4",

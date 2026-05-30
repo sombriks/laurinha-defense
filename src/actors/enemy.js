@@ -38,8 +38,9 @@ export class Enemy {
     this.#scene = scene
     this.#damage = Phaser.Math.Between(10, 50)
     this.#shape = scene.matter.add.circle(x, y, this.damage)
-    this.#img = scene.add.image(x, y, 'emoji', 15);
-    this.#img.setOrigin(0.5, 0.5);
+    this.#img = scene.add.image(x, y, 'emoji', 15)
+    this.#img.setOrigin(0.5, 0.5)
+    this.#shape.enemy = this
     this.update()
   }
 
@@ -49,7 +50,6 @@ export class Enemy {
     if (this.damage <= 20) {
       if (this.#scene.addScore) this.#scene.addScore(1);
       this.die();
-      this.#scene.sound.play('boom');
     }
   }
 
@@ -63,13 +63,14 @@ export class Enemy {
 
   die() {
     this.#scene.matter.world?.remove([this.shape])
-    this.#img.destroy();
+    this.#img.destroy()
     this.#isDead = true
+    this.#scene.sound.play('boom');
   }
 
   update() {
     this.#img.x = this.shape.position.x;
     this.#img.y = this.shape.position.y;
-    this.#img.setDisplaySize(this.damage, this.damage);
+    this.#img.setDisplaySize(this.damage * 2.5, this.damage * 2.5);
   }
 }

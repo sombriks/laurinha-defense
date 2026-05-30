@@ -4,19 +4,24 @@ import emoji from 'url:../imgs/spritesheet.png'
 
 import Phaser from "phaser"
 
-import {Bullet} from "../actors/bullet"
 import {Enemy} from "../actors/enemy"
+import {Player} from "../actors/player";
 
 export class Field extends Phaser.Scene {
+
+  #score
+  #player
+  #delay = 0
+  #enemies = []
+  #bullets = []
 
   constructor() {
     super("Field");
   }
 
-  #enemies = []
-  #delay = 0
-  #score
-  #hp
+  get bullets() {
+    return this.#bullets
+  }
 
   #scoreLabel
   #healthLabel
@@ -29,42 +34,20 @@ export class Field extends Phaser.Scene {
 
   create() {
     this.matter.world.setBounds();
+    this.#player = new Player(this);
 
-    this.#hp = 100;
     this.#score = 0;
-
     this.#scoreLabel = this.add.text(10, 10, "Score: 0");
-    this.#healthLabel = this.add.text(10, 30, "Health: " + this.#hp);
-
-    // the red line
-    this.add.graphics()
-      .lineStyle(2, 0xFF0000)
-      .moveTo(0, 590)
-      .lineTo(480, 590)
-      .stroke();
-
-    // player sprite
-    this.player = this.add.sprite(240, 590, 'emoji', 16); // cauboi
-
-    this.input.on('pointerdown', (ev) => {
-      const originX = 240;
-      const originY = 640;
-      const angle = Phaser.Math.Angle.Between(originX, originY, ev.x, ev.y);
-      const speed = 0.007;
-      const vx = Math.cos(angle) * speed;
-      const vy = Math.sin(angle) * speed;
-      new Bullet({scene: this, x: originX, y: originY, vx, vy});
-      this.sound.play('pew');
-    });
+    this.#healthLabel = this.add.text(10, 30, "Health: " + this.#player.hp);
   }
 
   update(time, delta) {
-    if (this.#hp <= 0) {
+    if (this.#player.dead) {
       this.game.scene.stop('Field');
       this.game.scene.start("GameOver");
     }
-
     this.#enemies = this.#enemies.filter(e => !e.dead);
+    this.#bullets = this.#bullets.filter(b => !b.dead);
     if (this.#delay < time) {
       const x = Phaser.Math.Between(0, 480);
       this.#enemies.push(new Enemy(this, x, 0));
@@ -72,6 +55,7 @@ export class Field extends Phaser.Scene {
       this.#delay = time + 1500;
     }
     this.#enemies.forEach(e => e.update());
+    this.#bullets.forEach(b => b.update());
   }
 
   addScore(s) {
@@ -80,9 +64,8 @@ export class Field extends Phaser.Scene {
   }
 
   causeDamage(d) {
-    this.#hp -= d
-    this.#healthLabel.text = "Health: " + this.#hp
+    this.#player.damage(d)
+    this.#healthLabel.text = "Health: " + this.#player.hp
     this.cameras.main.flash(200, 255, 0, 0);
-    this.sound.play('boom');
   }
 }
