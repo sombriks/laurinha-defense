@@ -1,7 +1,11 @@
+import pew from 'url:../sfx/pew.mp3'
+import boom from 'url:../sfx/boom.mp3'
+import emoji from 'url:../imgs/spritesheet.png'
+
 import Phaser from "phaser"
 
-import { Bullet } from "../actors/bullet.js"
-import { Enemy } from "../actors/enemy.js"
+import {Bullet} from "../actors/bullet"
+import {Enemy} from "../actors/enemy"
 
 export class Field extends Phaser.Scene {
 
@@ -18,9 +22,9 @@ export class Field extends Phaser.Scene {
   #healthLabel
 
   preload() {
-    this.load.audio('pew', 'assets/sfx/pew.mp3');
-    this.load.audio('boom', 'assets/sfx/boom.mp3');
-    this.load.spritesheet('emoji', 'assets/imgs/spritesheet.png', { frameWidth: 50, frameHeight: 50 });
+    this.load.audio('pew', pew);
+    this.load.audio('boom', boom);
+    this.load.spritesheet('emoji', emoji, {frameWidth: 50, frameHeight: 50});
   }
 
   create() {
@@ -49,7 +53,7 @@ export class Field extends Phaser.Scene {
       const speed = 0.007;
       const vx = Math.cos(angle) * speed;
       const vy = Math.sin(angle) * speed;
-      new Bullet({ scene: this, x: originX, y: originY, vx, vy });
+      new Bullet({scene: this, x: originX, y: originY, vx, vy});
       this.sound.play('pew');
     });
   }
