@@ -1,6 +1,7 @@
 import Phaser from "phaser"
 
 import {Intro} from "./scenes/intro.js"
+import "./assets/css/style.css"
 import {Field} from "./scenes/field.js"
 import {GameOver} from "./scenes/game-over.js"
 

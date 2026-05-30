@@ -6,3 +6,5 @@ node_modules/
 .sourcemaps
 dist/
 *.kate-swp
+.idea
+.parcel-cache
